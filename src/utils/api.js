@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-  // const API_KEY = "echogpt-P_RZHRD0RR-M2BageTPgR-mWYG59Jv2N-Q9_Tcy09wf-Ix6YeIcQu2_0fb3YVKPl5CDX";
+
   const API_KEY = process.env.NEXT_PUBLIC_API_SECRET_KEY
   console.log("Server-side API Key:",  process.env.NEXT_PUBLIC_API_SECRET_KEY ? "Loaded ✅" : "Not Found ❌");
 export const sendMessageToEchoGPT = async (message) => {
