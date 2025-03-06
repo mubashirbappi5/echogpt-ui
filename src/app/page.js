@@ -47,7 +47,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className='grid md:grid-cols-12 h-screen bg-gradient-to-r from-gray-900 to-gray-700 text-white'>
+    <div className='grid md:grid-cols-12 bg-gradient-to-r from-gray-900 to-gray-700 text-white'>
       {/* Sidebar for larger screens */}
       <aside className="hidden col-span-2  md:flex flex-col w-64 h-full bg-gray-900 p-5 space-y-6 shadow-lg">
         <h1 className="text-2xl font-bold flex items-center">
@@ -116,21 +116,24 @@ export default function Sidebar() {
             ))}
             {loading && <div className="text-gray-400 animate-pulse">Typing...</div>}
           </div>
-          <div className="flex mt-4">
-            <input 
-              type="text" 
-              value={input} 
-              onChange={(e) => setInput(e.target.value)} 
-              placeholder="Type a message..." 
-              className="flex-1 p-3 border rounded-l-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            />
-            <button 
-              onClick={sendMessage} 
-              className="bg-blue-600 text-white px-5 rounded-r-lg flex items-center justify-center hover:bg-blue-700 transition">
-              <IoSend className="text-xl" />
-            </button>
-          </div>
+          <div className="flex mt-4 bg-gray-800 p-2 rounded-lg shadow-lg border border-gray-700">
+  {/* Input Field */}
+  <input
+    type="text"
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    placeholder="Type a message..."
+    className="flex-1 p-3 bg-gray-900 text-white placeholder-gray-400 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+    onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+  />
+
+  {/* Send Button */}
+  <button 
+    onClick={sendMessage} 
+    className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-r-lg flex items-center justify-center hover:scale-105 transition-transform duration-200 shadow-lg hover:shadow-blue-500">
+    <IoSend className="text-xl" />
+  </button>
+</div>
         </div>
       </main>
     </div>
