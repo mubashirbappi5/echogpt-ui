@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { IoSend } from "react-icons/io5";
+import { IoSend, IoHome, IoChatbox, IoSettings, IoMenu, IoClose } from "react-icons/io5";
+import { FaHistory, FaServicestack, FaPhoneAlt } from "react-icons/fa";
 import { sendMessageToEchoGPT } from '@/utils/api';
 import Link from 'next/link';
 
@@ -34,7 +35,7 @@ export default function Sidebar() {
       const botResponse = await sendMessageToEchoGPT(input);
       const updatedMessages = [...newMessages, { text: botResponse, sender: 'bot' }];
       setMessages(updatedMessages);
-      saveHistory(updatedMessages); // Save to localStorage
+      saveHistory(updatedMessages);
     } catch (error) {
       const errorMessage = { text: "Error fetching response.", sender: 'bot' };
       const updatedMessages = [...newMessages, errorMessage];
@@ -46,51 +47,74 @@ export default function Sidebar() {
   };
 
   return (
-    <div className='grid md:grid-cols-12 h-screen'>
-      <div className="flex flex-col md:col-span-2">
-        {/* Sidebar for larger screens */}
-        <aside className="hidden md:flex flex-col w-64 h-full bg-gray-900 text-white p-5 space-y-4">
-          <h1 className="text-xl font-bold">EcoGPT</h1>
-          <nav className="flex flex-col space-y-3">
-            <Link href="/" className="hover:bg-gray-700 p-2 rounded">Home</Link>
-            <Link href="/history" className="hover:bg-gray-700 p-2 rounded">History</Link>
-            <Link href="/services" className="hover:bg-gray-700 p-2 rounded">Services</Link>
-            <Link href="/contact" className="hover:bg-gray-700 p-2 rounded">Contact</Link>
-          </nav>
-        </aside>
-
-        {/* Navbar for small screens */}
-        <nav className="md:hidden w-full bg-gray-900 text-white flex justify-between items-center p-4">
-          <h1 className="text-lg font-bold">Dashboard</h1>
-          <button onClick={() => setIsOpen(!isOpen)} className="text-white text-2xl">
-            {isOpen ? '✖' : '☰'}
-          </button>
+    <div className='grid md:grid-cols-12 h-screen bg-gradient-to-r from-gray-900 to-gray-700 text-white'>
+      {/* Sidebar for larger screens */}
+      <aside className="hidden col-span-2  md:flex flex-col w-64 h-full bg-gray-900 p-5 space-y-6 shadow-lg">
+        <h1 className="text-2xl font-bold flex items-center">
+          <IoChatbox className="mr-2" /> EcoGPT
+        </h1>
+        <nav className="flex flex-col space-y-4">
+          <Link href="/" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <IoHome className="mr-2" /> Home
+          </Link>
+          <Link href="/history" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <FaHistory className="mr-2" /> History
+          </Link>
+          <Link href="/services" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <FaServicestack className="mr-2" /> Services
+          </Link>
+          <Link href="/contact" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <FaPhoneAlt className="mr-2" /> Contact
+          </Link>
+          <Link href="/settings" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <IoSettings className="mr-2" /> Settings
+          </Link>
         </nav>
+      </aside>
 
-        {/* Mobile Sidebar Menu */}
-        {isOpen && (
-          <div className="md:hidden fixed top-0 left-0 w-3/4 h-full bg-gray-900 text-white p-5 space-y-4 z-50">
-            <nav className="flex flex-col space-y-3 mt-10">
-              <Link href="/" className="hover:bg-gray-700 p-2 rounded" onClick={() => setIsOpen(false)}>Home</Link>
-              <Link href="/history" className="hover:bg-gray-700 p-2 rounded" onClick={() => setIsOpen(false)}>History</Link>
-              <Link href="/services" className="hover:bg-gray-700 p-2 rounded" onClick={() => setIsOpen(false)}>Services</Link>
-              <Link href="/contact" className="hover:bg-gray-700 p-2 rounded" onClick={() => setIsOpen(false)}>Contact</Link>
-            </nav>
-          </div>
-        )}
-      </div>
-      
+      {/* Mobile Navbar */}
+      <nav className="md:hidden w-full bg-gray-900 flex justify-between items-center p-4">
+        <h1 className="text-lg font-bold flex items-center">
+          <IoChatbox className="mr-2" /> EcoGPT
+        </h1>
+        <button onClick={() => setIsOpen(!isOpen)} className="text-white text-2xl">
+          {isOpen ? <IoClose /> : <IoMenu />}
+        </button>
+      </nav>
+
+      {/* Mobile Sidebar */}
+      {isOpen && (
+        <div className="md:hidden fixed top-0 left-0 w-3/4 h-full bg-gray-900 p-5 space-y-6 z-50">
+          <nav className="flex flex-col space-y-4">
+            <Link href="/" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <IoHome className="mr-2" /> Home
+            </Link>
+            <Link href="/history" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaHistory className="mr-2" /> History
+            </Link>
+            <Link href="/services" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaServicestack className="mr-2" /> Services
+            </Link>
+            <Link href="/contact" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaPhoneAlt className="mr-2" /> Contact
+            </Link>
+          </nav>
+        </div>
+      )}
+
       {/* Chat Section */}
-      <main className="p-5 md:col-span-10 flex flex-col h-full mx-auto w-11/12">
-        <div className="flex flex-col h-screen w-full p-5 bg-gray-100">
-          <h1 className="text-xl font-bold mb-4">Chat Section</h1>
-          <div className="flex-1 bg-white p-4 rounded shadow overflow-y-auto h-96">
+      <main className="p-5 md:col-span-10 flex flex-col h-full mx-auto w-10/12">
+        <div className="flex flex-col h-screen w-full bg-gray-800 p-5 rounded-lg shadow-lg">
+          <h1 className="text-xl font-bold mb-4 text-center">💬 Chat with EcoGPT</h1>
+          <div className="flex-1 bg-gray-900 p-4 rounded-lg shadow-lg overflow-y-auto h-96">
             {messages.map((msg, index) => (
-              <div key={index} className={`p-2 my-1 rounded ${msg.sender === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-300'}`}>
+              <div key={index} className={`p-3 my-2 rounded-lg shadow-md w-fit max-w-xs ${
+                msg.sender === 'user' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-600 text-white'
+              }`}>
                 {msg.text}
               </div>
             ))}
-            {loading && <div className="text-gray-500">Typing...</div>}
+            {loading && <div className="text-gray-400 animate-pulse">Typing...</div>}
           </div>
           <div className="flex mt-4">
             <input 
@@ -98,11 +122,13 @@ export default function Sidebar() {
               value={input} 
               onChange={(e) => setInput(e.target.value)} 
               placeholder="Type a message..." 
-              className="flex-1 p-2 border rounded-l"
+              className="flex-1 p-3 border rounded-l-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
               onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
             />
-            <button onClick={sendMessage} className="bg-blue-500 text-white px-4 rounded-r">
-              <IoSend />
+            <button 
+              onClick={sendMessage} 
+              className="bg-blue-600 text-white px-5 rounded-r-lg flex items-center justify-center hover:bg-blue-700 transition">
+              <IoSend className="text-xl" />
             </button>
           </div>
         </div>
