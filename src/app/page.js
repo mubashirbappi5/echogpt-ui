@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { IoSend, IoHome, IoChatbox, IoSettings, IoMenu, IoClose } from "react-icons/io5";
-import { FaHistory, FaServicestack, FaPhoneAlt } from "react-icons/fa";
+import { FaHistory, FaServicestack, FaPhoneAlt, FaDiscord } from "react-icons/fa";
 import { sendMessageToEchoGPT } from '@/utils/api';
 import Link from 'next/link';
 
@@ -60,15 +60,12 @@ export default function Sidebar() {
           <Link href="/history" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
             <FaHistory className="mr-2" /> History
           </Link>
-          <Link href="/services" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
-            <FaServicestack className="mr-2" /> Services
+          <Link href="/support" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
+            <FaServicestack className="mr-2" /> Support
           </Link>
-          <Link href="/contact" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
-            <FaPhoneAlt className="mr-2" /> Contact
-          </Link>
-          <Link href="/settings" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">
-            <IoSettings className="mr-2" /> Settings
-          </Link>
+          <a href="https://discord.com/invite/JG8SXMtaeH" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaDiscord  className="mr-2 text-blue-400" />Discord
+            </a>
         </nav>
       </aside>
 
@@ -92,12 +89,12 @@ export default function Sidebar() {
             <Link href="/history" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
               <FaHistory className="mr-2" /> History
             </Link>
-            <Link href="/services" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
-              <FaServicestack className="mr-2" /> Services
+            <Link href="/support" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaServicestack className="mr-2" /> Support
             </Link>
-            <Link href="/contact" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
-              <FaPhoneAlt className="mr-2" /> Contact
-            </Link>
+            <a href="https://discord.com/invite/JG8SXMtaeH" className="flex items-center p-3 hover:bg-gray-700 rounded-lg" onClick={() => setIsOpen(false)}>
+              <FaDiscord className="mr-2 text-blue-400" />Discord
+            </a>
           </nav>
         </div>
       )}
