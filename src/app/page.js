@@ -51,7 +51,8 @@ export default function Sidebar() {
       {/* Sidebar for larger screens */}
       <aside className="hidden col-span-2  md:flex flex-col w-64 h-full bg-gray-900 p-5 space-y-6 shadow-lg">
         <h1 className="text-2xl font-bold flex items-center">
-          <IoChatbox className="mr-2" /> EcoGPT
+        <IoChatbox className="mr-2" /> EcoGPT
+          
         </h1>
         <nav className="flex flex-col space-y-4">
           <Link href="/" className="flex items-center p-3 hover:bg-gray-700 rounded-lg transition">

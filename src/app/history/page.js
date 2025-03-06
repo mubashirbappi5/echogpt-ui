@@ -25,7 +25,7 @@ export default function HistoryPage() {
           </Link>
         </div>
 
-        <p className="text-gray-300 mt-2 text-center">
+        <p className="text-gray-300 mt-2 ">
           Access your chat history across diverse topics and interactions.
         </p>
 
